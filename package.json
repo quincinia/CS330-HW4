@@ -1,0 +1,15 @@
+{
+    "name": "cs330-hw4",
+    "version": "1.0.0",
+    "description": "Simple MVC web app",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js",
+        "server": "json-server --watch db.json"
+    },
+    "author": "Jacob Gayban",
+    "license": "MIT",
+    "dependencies": {
+        "json-server": "^0.17.0"
+    }
+}
