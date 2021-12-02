@@ -4,8 +4,8 @@ class Controller {
     constructor(model, view) {
         this.model = model
         this.view = view
-
-        this.view.renderContacts(this.model.getContacts())
+        this.view.setController(this)
+        // this.view.renderContacts(this.model.getContacts())
     }
 
     submitForm() {
@@ -71,6 +71,18 @@ class Controller {
         this.model.deleteContact(index)
 
         // Rerender view
+        this.view.renderContacts(this.model.getContacts())
+    }
+
+    editHandler(index) {
+        this.model.editIndex = index
+
+        // Not checking for undefined 
+        this.view.populateForm(this.model.getContact(index))
+    }
+
+    setContacts(contacts) {
+        this.model.setContacts(contacts)
         this.view.renderContacts(this.model.getContacts())
     }
 }

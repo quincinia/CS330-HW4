@@ -6,28 +6,64 @@ class View {
         this.contactForm = document.querySelector('form')
     }
     
+    setController(controller) {
+        this.controller = controller
+    }
+
     renderContacts(contacts) {
         // Clear current list
         this.contactsList.replaceChildren()
 
         // Render new list
-        for (let contact in contacts) {
-            // Generate html from contact info
+        let view = this;
+        contacts.forEach((contact, index) => {
             let listItem = document.createElement('li')
-            listItem.innerHTML = `
-                <div class="info-container">
-                    <p>Name: ${contact.name}</p>
-                    <p>Email: <a href="#">${contact.email}</a></p>
-                    <p>Phone: ${contact.phone}</p>
-                    <p>Description: ${contact.description}</p>
-                </div>
-                <div class="button edit">Edit</div>
-                <div class="button delete">Delete</div>
+
+            // Display contact info
+            let contactInfo = document.createElement('div')
+            contactInfo.className = 'info-container'
+            contactInfo.innerHTML = `
+                <p>Name: ${contact.name}</p>   
+                <p>Email: <a href="#">${contact.email}</a></p>
+                <p>Phone: ${contact.phone}</p>
+                <p>Description: ${contact.description}</p>
             `
 
-            // Attach new element to list
-            this.contactsList.append(listItem);
-        }
+            // Create edit button
+            let editButton = document.createElement('div')
+            editButton.className = 'button edit'
+            editButton.innerText = 'Edit'
+            editButton.addEventListener('click', () => view.controller.editHandler(index))
+
+            // Create delete button
+            let deleteButton = document.createElement('div')
+            deleteButton.className = 'button delete'
+            deleteButton.innerText = 'Delete'
+            deleteButton.addEventListener('click', () => view.controller.deleteContact(index))
+
+            // Add all components to the new list item
+            listItem.append(contactInfo, editButton, deleteButton)
+
+            // Attach new element to the list
+            view.contactsList.append(listItem)
+        })
+        // for (let contact in contacts) {
+        //     // Generate html from contact info
+        //     let listItem = document.createElement('li')
+        //     listItem.innerHTML = `
+        //         <div class="info-container">
+        //             <p>Name: ${contact.name}</p>
+        //             <p>Email: <a href="#">${contact.email}</a></p>
+        //             <p>Phone: ${contact.phone}</p>
+        //             <p>Description: ${contact.description}</p>
+        //         </div>
+        //         <div class="button edit">Edit</div>
+        //         <div class="button delete">Delete</div>
+        //     `
+
+        //     // Attach new element to list
+        //     this.contactsList.append(listItem);
+        // }
     }
 
     populateForm(contact) {
