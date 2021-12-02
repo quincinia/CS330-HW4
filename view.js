@@ -4,7 +4,6 @@ class View {
         // Grabbing our elements
         this.contactsList = document.querySelector('ol')
         this.contactForm = document.querySelector('form')
-        this.submitButton = document.querySelector('button')
     }
 
     setController(controller) {
@@ -88,6 +87,6 @@ class View {
     }
 
     clearForm() {
-        populateForm({ name: '', email: '', phone: '', description: '' })
+        this.populateForm({ name: '', email: '', phone: '', description: '' })
     }
 }

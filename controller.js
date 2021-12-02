@@ -10,7 +10,7 @@ class Controller {
 
         // Attach handler to submit button
         let controller = this
-        this.view.submitButton.addEventListener('click', (event) => {
+        this.view.contactForm.addEventListener('submit', (event) => {
             event.preventDefault()
             controller.submitForm()
         })
@@ -21,19 +21,17 @@ class Controller {
         // Grab form data
         // There's probably a better way to do this
         let formData = {
-            name: document.querySelector('[name=name]').getAttribute('value'),
-            email: document.querySelector('[name=email]').getAttribute('value'),
-            phone: document.querySelector('[name=phone]').getAttribute('value'),
-            description: document
-                .querySelector('[name=description]')
-                .getAttribute('value'),
+            name: document.querySelector('[name=name]').value,
+            email: document.querySelector('[name=email]').value,
+            phone: document.querySelector('[name=phone]').value,
+            description: document.querySelector('[name=description]').value,
         }
-
+        console.log(formData)
         // Determine whether to create or edit
         if (this.model.editIndex === -1) {
-            await createContact(formData)
+            await this.createContact(formData)
         } else {
-            await updateContact(this.model.editIndex, formData)
+            await this.updateContact(this.model.editIndex, formData)
         }
 
         // Reset form
