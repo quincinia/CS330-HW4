@@ -4,25 +4,36 @@ class Controller {
     constructor(model, view) {
         this.model = model
         this.view = view
+
+        // View needs a reference to the controller
         this.view.setController(this)
+
+        // Attach handler to submit button
+        let controller = this
+        this.view.submitButton.addEventListener('click', (event) => {
+            event.preventDefault()
+            controller.submitForm()
+        })
         // this.view.renderContacts(this.model.getContacts())
     }
 
-    submitForm() {
+    async submitForm() {
         // Grab form data
         // There's probably a better way to do this
         let formData = {
             name: document.querySelector('[name=name]').getAttribute('value'),
             email: document.querySelector('[name=email]').getAttribute('value'),
             phone: document.querySelector('[name=phone]').getAttribute('value'),
-            description: document.querySelector('[name=description]').getAttribute('value')
+            description: document
+                .querySelector('[name=description]')
+                .getAttribute('value'),
         }
 
         // Determine whether to create or edit
         if (this.model.editIndex === -1) {
-            createContact(formData)
+            await createContact(formData)
         } else {
-            updateContact(this.model.editIndex, formData)
+            await updateContact(this.model.editIndex, formData)
         }
 
         // Reset form
@@ -34,10 +45,10 @@ class Controller {
     }
 
     async createContact(data) {
-        let response = await fetch(url, { 
+        let response = await fetch(url, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json;charset=utf-8' },
-            body: JSON.stringify(data)
+            body: JSON.stringify(data),
         })
         // Send alert on success or fail?
 
@@ -49,10 +60,10 @@ class Controller {
     async updateContact(index, data) {
         // Normally check for undefined
         let id = this.model.getContact(index).id
-        let response = await fetch(url + '/' + id, { 
-            method: 'PUT', 
+        let response = await fetch(url + '/' + id, {
+            method: 'PUT',
             headers: { 'Content-Type': 'application/json;charset=utf-8' },
-            body: JSON.stringify(data)
+            body: JSON.stringify(data),
         })
         // Alert on success or fail?
 
@@ -64,8 +75,8 @@ class Controller {
     async deleteContact(index) {
         // Normally check for undefined
         let id = this.model.getContact(index).id
-        let response = await fetch(url + '/' + id, { 
-            method: 'DELETE'
+        let response = await fetch(url + '/' + id, {
+            method: 'DELETE',
         })
 
         this.model.deleteContact(index)
@@ -77,7 +88,7 @@ class Controller {
     editHandler(index) {
         this.model.editIndex = index
 
-        // Not checking for undefined 
+        // Not checking for undefined
         this.view.populateForm(this.model.getContact(index))
     }
 

@@ -4,8 +4,9 @@ class View {
         // Grabbing our elements
         this.contactsList = document.querySelector('ol')
         this.contactForm = document.querySelector('form')
+        this.submitButton = document.querySelector('button')
     }
-    
+
     setController(controller) {
         this.controller = controller
     }
@@ -15,7 +16,7 @@ class View {
         this.contactsList.replaceChildren()
 
         // Render new list
-        let view = this;
+        let view = this
         contacts.forEach((contact, index) => {
             let listItem = document.createElement('li')
 
@@ -33,13 +34,17 @@ class View {
             let editButton = document.createElement('div')
             editButton.className = 'button edit'
             editButton.innerText = 'Edit'
-            editButton.addEventListener('click', () => view.controller.editHandler(index))
+            editButton.addEventListener('click', () =>
+                view.controller.editHandler(index)
+            )
 
             // Create delete button
             let deleteButton = document.createElement('div')
             deleteButton.className = 'button delete'
             deleteButton.innerText = 'Delete'
-            deleteButton.addEventListener('click', () => view.controller.deleteContact(index))
+            deleteButton.addEventListener('click', () =>
+                view.controller.deleteContact(index)
+            )
 
             // Add all components to the new list item
             listItem.append(contactInfo, editButton, deleteButton)
@@ -62,19 +67,27 @@ class View {
         //     `
 
         //     // Attach new element to list
-        //     this.contactsList.append(listItem);
+        //     this.contactsList.append(listItem)
         // }
     }
 
     populateForm(contact) {
         // Can prob do this in a loop
-        document.querySelector('[name=name]').setAttribute('value', contact.name);
-        document.querySelector('[name=email]').setAttribute('value', contact.email);
-        document.querySelector('[name=phone]').setAttribute('value', contact.phone);
-        document.querySelector('[name=description]').setAttribute('value', contact.description);
+        document
+            .querySelector('[name=name]')
+            .setAttribute('value', contact.name)
+        document
+            .querySelector('[name=email]')
+            .setAttribute('value', contact.email)
+        document
+            .querySelector('[name=phone]')
+            .setAttribute('value', contact.phone)
+        document
+            .querySelector('[name=description]')
+            .setAttribute('value', contact.description)
     }
 
     clearForm() {
-        populateForm({name: '', email: '', phone: '', description: '', })
+        populateForm({ name: '', email: '', phone: '', description: '' })
     }
 }

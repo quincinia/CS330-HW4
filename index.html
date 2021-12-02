@@ -82,8 +82,8 @@
                 let response = await fetch(url)
                 return await response.json()
             }
-            let app = new Controller(new Model(contacts.arr), new View())
-            getAllContacts.then(function (contacts) {
+            let app = new Controller(new Model(), new View())
+            getAllContacts().then(function (contacts) {
                 app.setContacts(contacts)
             })
         </script>

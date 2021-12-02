@@ -39,7 +39,7 @@ class Model {
     }
     
     setContacts(contacts) {
-        this.contacts = contacts;
+        this.contacts = contacts
     }
     // other functions needed for the form
 }
