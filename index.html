@@ -78,12 +78,12 @@
 
         <!--Run our app-->
         <script>
-            async function getAllContacts() {
+            async function getAllContacts(contacts) {
                 let response = await fetch(url)
-                let result = await response.json()
-                return result
+                contacts = await response.json()
             }
-            let contacts = getAllContacts()
+            let contacts = []
+            getAllContacts(contacts)
             console.log(contacts)
             let app = new Controller(new Model(contacts), new View())
         </script>
