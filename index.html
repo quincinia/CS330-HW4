@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>CS330 HW4</title>
+        <link rel="stylesheet" type="text/css" href="style.css" />
+    </head>
+    <body>
+        <main>
+            <div id="submitted-forms">
+                <ol>
+                    <li>
+                        <div class="info-container">
+                            <p>Name: Joey</p>
+                            <p>Email: <a href="#">J@gmail.com</a></p>
+                            <p>Phone: 775-162-1620</p>
+                            <p>Description: Needed help</p>
+                        </div>
+                        <div class="button edit">Edit</div>
+                        <div class="button delete">Delete</div>
+                    </li>
+                    <li>
+                        <div class="info-container">
+                            <p>Name: Paul</p>
+                            <p>Email: <a href="#">P@gmail.com</a></p>
+                            <p>Phone: 775-155-1620</p>
+                            <p>Description: Needed help</p>
+                        </div>
+                        <div class="button edit">Edit</div>
+                        <div class="button delete">Delete</div>
+                    </li>
+                    <li>
+                        <div class="info-container">
+                            <p>Name: Jerry</p>
+                            <p>Email: <a href="#">JP@gmail.com</a></p>
+                            <p>Phone: 775-155-1434</p>
+                            <p>Description: Needed the manager</p>
+                        </div>
+                        <div class="button edit">Edit</div>
+                        <div class="button delete">Delete</div>
+                    </li>
+                    <li><div class="info-container">test item</div></li>
+                </ol>
+            </div>
+            <div id="info-form">
+                <form>
+                    <div class="row">
+                        <label for="name">Name:</label>
+                        <input type="text" name="name" />
+                    </div>
+
+                    <div class="row">
+                        <label for="email">Email:</label>
+                        <input type="text" name="email" />
+                    </div>
+
+                    <div class="row">
+                        <label for="phone">Phone:</label>
+                        <input type="text" name="phone" />
+                    </div>
+
+                    <div class="row">
+                        <label for="description">Description:</label>
+                        <input type="text" name="description" />
+                    </div>
+
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+        </main>
+
+        <!--Load in our MVC-->
+        <script src="model.js"></script>
+        <script src="view.js"></script>
+        <script src="controller.js"></script>
+
+        <!--Run our app-->
+        <script>
+            async function getAllContacts() {
+                let response = await fetch(url)
+                let result = await response.json()
+                return result
+            }
+            let contacts = getAllContacts()
+            console.log(contacts)
+            let app = new Controller(new Model(contacts), new View())
+        </script>
+    </body>
+</html>
