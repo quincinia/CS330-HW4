@@ -74,19 +74,40 @@ class View {
         // Can prob do this in a loop
         document
             .querySelector('[name=name]')
-            .setAttribute('value', contact.name)
+            .value = contact.name
         document
             .querySelector('[name=email]')
-            .setAttribute('value', contact.email)
+            .value = contact.email
         document
             .querySelector('[name=phone]')
-            .setAttribute('value', contact.phone)
+            .value = contact.phone
         document
             .querySelector('[name=description]')
-            .setAttribute('value', contact.description)
+            .value = contact.description
     }
 
     clearForm() {
         this.populateForm({ name: '', email: '', phone: '', description: '' })
+    }
+
+    // Debugging functions, not used
+    get formAttrData() {
+        let fields = this.contactForm.children
+        return {
+            name: fields[0].value,
+            email: fields[1].value,
+            phone: fields[2].value,
+            description: fields[3].value
+        }
+    }
+
+    get formPropData() {
+        let fields = this.contactForm.children
+        return {
+            name: fields[0].getAttribute('value'),
+            email: fields[1].getAttribute('value'),
+            phone: fields[2].getAttribute('value'),
+            description: fields[3].getAttribute('value')
+        }
     }
 }
