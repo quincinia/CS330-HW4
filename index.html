@@ -84,6 +84,26 @@
                 let response = await fetch(url)
                 return await response.json()
             }
+            let contacts = [
+                {
+                    name: 'Joey',
+                    email: 'J@gmail.com',
+                    phone: '775-162-1620',
+                    description: 'Needed help'
+                },
+                {
+                    name: 'Paul',
+                    email: 'P@gmail.com',
+                    phone: '775-155-1620',
+                    description: 'Needed help'
+                },
+                {
+                    name: 'Jerry',
+                    email: 'JP@gmail.com',
+                    phone: '775-155-1434',
+                    description: 'Needed the manager'
+                },
+            ]
             let app = new Controller(new Model(), new View())
             getAllContacts().then(function (contacts) {
                 app.setContacts(contacts)
